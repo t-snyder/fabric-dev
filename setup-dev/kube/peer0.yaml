@@ -1,0 +1,180 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: peer0-org1
+  labels:
+    app: fabric
+    role: peer
+    peer-id: "0"
+    org: "1"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: peer-pod0
+      labels:
+        app: fabric
+        role: peer
+        peer-id: "0"
+        org: "1"
+    spec:
+      restartPolicy: Always
+      volumes:
+#        - name: fabric-vol-msp
+#          hostPath:
+#            path: /data/driving-files/fabric-peer/peer0-org1/msp
+#        - name: fabric-vol-tls
+#          hostPath:
+#            path: /data/driving-files/fabric-peer/peer0-org1/tls
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+      containers:
+        - name: org1-peer0-container
+          imagePullPolicy: IfNotPresent
+          image: library/peer0-org1:1.0.4
+          workingDir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+          volumeMounts:
+#            - mountPath: /etc/hyperledger/fabric/msp
+#              name: fabric-vol-msp
+#            - mountPath: /etc/hyperledger/fabric/tls
+#              name: fabric-vol-tls
+            - mountPath: /host/var/run/docker.sock
+              name: docker-sock
+          env:
+            - name: CORE_VM_ENDPOINT
+              value: unix:///host/var/run/docker.sock
+            - name: CORE_PEER_ID
+              value: "peer0-org1"
+            - name: CORE_PEER_ADDRESS
+              value: "peer0-org1:7051"
+#            - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
+#              value: "peer0-org1:7051"
+#            - name: CORE_PEER_GOSSIP_BOOTSTRAP
+#              value: "peer0-org1:7051"
+#            - name: CORE_PEER_CHAINCODELISTENADDRESS
+#              value: "peer0-org1:8000"
+            - name: CHAINCODE_LISTEN_ADDRESS
+              value: "0.0.0.0:8000"
+#            - name: CORE_VM_HOSTCONFIG_DNS
+#              value: $NGINX_PROXY_DNS
+            - name: CORE_PEER_LOCALMSPID
+              value: "Org1MSP"
+            - name: CORE_LOGGING_LEVEL
+              value: debug
+#            - name: CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE
+#              value: "bridge"
+#            - name: CORE_PEER_GOSSIP_USELEADERELECTION
+#              value: "true"
+#            - name: CORE_PEER_GOSSIP_ORGLEADER
+#              value: "false"
+#            - name: CORE_PEER_GOSSIP_SKIPHANDSHAKE
+#              value: "true"
+            - name: CORE_PEER_PROFILE_ENABLED
+              value: "true"
+            - name: CORE_PEER_TLS_ENABLED
+              value: "false"
+            - name: CORE_PEER_TLS_CERT_FILE
+              value: "/etc/hyperledger/fabric/tls/server.crt"
+            - name: CORE_PEER_TLS_KEY_FILE
+              value: "/etc/hyperledger/fabric/tls/server.key"
+            - name: CORE_PEER_TLS_ROOTCERT_FILE
+              value: "/etc/hyperledger/fabric/tls/ca.crt"
+            - name: CORE_LOGGING_LEVEL
+              value: debug
+            - name: CORE_LOGGING_PEER
+              value: debug
+            - name: CORE_LOGGING_CAUTHDSL
+              value: debug
+#            - name: CORE_LOGGING_GOSSIP
+#              value: debug
+            - name: CORE_LOGGING_LEDGER
+              value: debug
+            - name: CORE_LOGGING_MSP
+              value: info
+            - name: CORE_LOGGING_POLICIES
+              value: debug
+            - name: CORE_VM_DOCKER_ATTACHSTDOUT
+              value: "true"
+            - name: CORE_LOGGING_GRPC
+              value: debug
+            - name: GODEBUG
+              value: "netdns=go"
+            - name: CORE_LEDGER_STATE_STATEDATABASE
+              value: CouchDB
+            - name: CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS
+              value: localhost:5984
+# The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+# provide the credentials for ledger to connect to CouchDB.  The username and password must
+# match the username and password set for the associated CouchDB.
+            - name: CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME
+              value: "dev01"
+            - name: CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+              value: "dev"
+          ports:
+            - containerPort: 7051
+            - containerPort: 7052
+            - containerPort: 7053
+            - containerPort: 8000
+          command:
+            - peer
+            - node
+            - start
+            - --peer-defaultchain=false
+#            - /bin/bash
+#            - -c
+#            - 'while true; do sleep 20170504; done'
+        - name: org1-peer0-couchdb
+          imagePullPolicy: IfNotPresent
+          image: ibmblockchain/fabric-couchdb:1.0.4
+          env:
+            - name: COUCHDB_USER
+              value: "dev01"
+            - name: COUCHDB_PASSWORD
+              value: "dev"
+            - name: COUCHDB_DEV_INIT
+              value: "true"
+          ports:
+            - containerPort: 5984
+#        - name: org1-peer0-sdk
+#          imagePullPolicy: IfNotPresent
+#          image: library/sdk-peer0-org1:0.1
+#          ports:
+#            - containerPort: 9090
+#          command:
+#            - /bin/bash
+#            - -c
+#            - 'while true; do sleep 20170504; done'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: peer0-org1
+  labels:
+    app: fabric
+spec:
+  type: ClusterIP
+  ports:
+    - name: "7051"
+      targetPort: 7051
+      port: 7051
+    - name: "7052"
+      targetPort: 7052
+      port: 7052
+    - name: "7053"
+      targetPort: 7053
+      port: 7053
+    - name: "chaincode-listen-address"
+      targetPort: 8000
+      port: 8000
+#  type: NodePort
+#  ports:
+#  - port: 9090
+#    targetPort: 30210
+#    protocol: TCP
+#    name: kafka    
+  selector:
+    app: fabric
+    role: peer
+    peer-id: "0"
+    org: "1"

@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sdk-org1
+  labels:
+    app: fabric
+    role: sdk-wrapper
+    peer-id: "0"
+    org: "1"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: sdkwrapper-org1
+      labels:
+        app: fabric
+        role: sdk-wrapper
+        peer-id: "0"
+        org: "1"
+    spec:
+      restartPolicy: Always
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+      containers:
+        - name: org1-sdk
+          imagePullPolicy: IfNotPresent
+          image: library/sdk-org1:0.1
+          ports:
+            - containerPort: 9090
+          command:
+            - /bin/sh
+            - -c
+            - 'while true; do sleep 20170504; done'
+#            - /usr/bin/java
+#            - -jar
+#            - /usr/lib/sdkservice.jar
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sdkwrapper-org1
+  labels:
+    app: fabric
+spec:
+  type: NodePort
+  ports:
+    - name: "brokers"
+      port: 9090
+  selector:
+    app: fabric
+    role: sdk-wrapper
+    peer-id: "0"
+    org: "1"

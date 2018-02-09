@@ -1,0 +1,102 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: fabric-cli
+  labels:
+    app: fabric
+    role: cli
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: cli-pod
+      labels:
+        role: cli
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: cli-container
+          imagePullPolicy: IfNotPresent
+          image: library/cli-peer:1.0.4
+          workingDir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+          tty: true
+          volumeMounts:
+#            - mountPath: /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+#              name: crypto
+#            - mountPath: /opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+#              name: scripts
+#            - mountPath: /opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+#              name: channel-artifacts
+#            - mountPath: /etc/hyperledger/fabric/configtx.yaml
+#              name: configtx
+#            - mountPath: /etc/hyperledger/fabric/crypto-config.yaml
+#              name: crypto-config
+            - mountPath: /var/run/docker.sock
+              name: docker-sock
+              readOnly: false
+          env:
+            - name: CORE_VM_ENDPOINT
+              value: unix:///var/run/docker.sock
+            - name: CORE_PEER_ID
+              value: fabric-cli
+            - name: CORE_PEER_ADDRESS
+              value: "peer0-org1:7051"
+            - name: CORE_PEER_LOCALMSPID
+              value: "Org1MSP"
+            - name: CORE_PEER_TLS_ENABLED
+              value: "false"
+            - name: CORE_PEER_TLS_CERT_FILE
+              value: "/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/peers/peer0.Org1/tls/server.crt"
+            - name: CORE_PEER_TLS_KEY_FILE
+              value: "/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/peers/peer0.Org1/tls/server.key"
+            - name: CORE_PEER_TLS_ROOTCERT_FILE
+              value: "/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/peers/peer0.Org1/tls/ca.crt"
+            - name: CORE_PEER_MSPCONFIGPATH
+              value: "/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/users/Admin@Org1/msp"
+            - name: CORE_LOGGING_LEVEL
+              value: debug
+            - name: CORE_LOGGING_PEER
+              value: debug
+            - name: CORE_LOGGING_CAUTHDSL
+              value: debug
+            - name: CORE_LOGGING_GOSSIP
+              value: debug
+            - name: CORE_LOGGING_LEDGER
+              value: debug
+            - name: CORE_LOGGING_MSP
+              value: info
+            - name: CORE_LOGGING_POLICIES
+              value: debug
+            - name: CORE_VM_DOCKER_ATTACHSTDOUT
+              value: "true"
+            - name: CORE_LOGGING_GRPC
+              value: debug
+            - name: GODEBUG
+              value: "netdns=go"
+          command:
+#             - "cd /opt/gopath/src/github.com/hyperledger/fabric/peer &&"
+            - /bin/bash
+            - -c
+            - 'while true; do sleep 20170504; done'
+      volumes:
+#        - name: crypto
+#          hostPath:
+#            path: /data/driving-files/crypto-config
+#        - name: scripts
+#          hostPath:
+#            path: /data/driving-files/scripts
+#        - name: channel-artifacts
+#          hostPath:
+#            path: /data/driving-files/channel-artifacts
+#        - name: configtx
+#          hostPath:
+#            path: /data/driving-files/configtx.yaml
+#        - name: crypto-config
+#          hostPath:
+#            path: /data/driving-files/crypto-config.yaml
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+        # - name: kube
+        #   hostPath:
+        #     path: /data/packk

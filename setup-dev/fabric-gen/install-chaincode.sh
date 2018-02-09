@@ -1,0 +1,23 @@
+echo "Installing public chaincode on each peer"
+CORE_PEER_ADDRESS=peer0-org1:7051 CORE_PEER_LOCALMSPID="Org1MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/users/Admin@Org1/msp peer chaincode install -n publiccc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+CORE_PEER_ADDRESS=peer0-org2:7051 CORE_PEER_LOCALMSPID="Org2MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org2/users/Admin@Org2/msp peer chaincode install -n publiccc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+CORE_PEER_ADDRESS=peer0-org3:7051 CORE_PEER_LOCALMSPID="Org3MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org3/users/Admin@Org3/msp peer chaincode install -n publiccc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+CORE_PEER_ADDRESS=peer0-org4:7051 CORE_PEER_LOCALMSPID="Org4MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org4/users/Admin@Org4/msp peer chaincode install -n publiccc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+
+echo "Initializing public chaincode. It is only done once by a single peer."
+CORE_PEER_ADDRESS=peer0-org1:7051 CORE_PEER_LOCALMSPID="Org1MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/users/Admin@Org1/msp CORE_PEER_CHAINCODELISTENADDRESS=peer0-org1:8000 peer chaincode instantiate -o orderer-service:7050 -C publicchannel -n publiccc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('Org1MSP.member','Org2MSP.member')"
+
+echo "Installing mgmtorgcc chaincode on each peer"
+CORE_PEER_ADDRESS=peer0-org1:7051 CORE_PEER_LOCALMSPID="Org1MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/users/Admin@Org1/msp peer chaincode install -n mgmtorgcc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+CORE_PEER_ADDRESS=peer0-org2:7051 CORE_PEER_LOCALMSPID="Org2MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org2/users/Admin@Org2/msp peer chaincode install -n mgmtorgcc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+CORE_PEER_ADDRESS=peer0-org3:7051 CORE_PEER_LOCALMSPID="Org3MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org3/users/Admin@Org3/msp peer chaincode install -n mgmtorgcc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+CORE_PEER_ADDRESS=peer0-org4:7051 CORE_PEER_LOCALMSPID="Org4MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org4/users/Admin@Org4/msp peer chaincode install -n mgmtorgcc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+
+echo "Initializing mgmtorgcc chaincode for channel mgmtorg2channel. It is only done once by a single peer."
+CORE_PEER_ADDRESS=peer0-org1:7051 CORE_PEER_LOCALMSPID="Org1MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/users/Admin@Org1/msp CORE_PEER_CHAINCODELISTENADDRESS=peer0-org1:8000 peer chaincode instantiate -o orderer-service:7050 -C mgmtorg2channel -n mgmtorgcc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('Org1MSP.member','Org2MSP.member')"
+
+echo "Initializing mgmtorgcc chaincode for channel mgmtorg3channel. It is only done once by a single peer."
+CORE_PEER_ADDRESS=peer0-org1:7051 CORE_PEER_LOCALMSPID="Org1MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/users/Admin@Org1/msp CORE_PEER_CHAINCODELISTENADDRESS=peer0-org1:8000 peer chaincode instantiate -o orderer-service:7050 -C mgmtorg3channel -n mgmtorgcc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('Org1MSP.member','Org3MSP.member')"
+
+echo "Initializing mgmtorgcc chaincode for channel mgmtorg4channel. It is only done once by a single peer."
+CORE_PEER_ADDRESS=peer0-org1:7051 CORE_PEER_LOCALMSPID="Org1MSP" CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/Org1/users/Admin@Org1/msp CORE_PEER_CHAINCODELISTENADDRESS=peer0-org1:8000 peer chaincode instantiate -o orderer-service:7050 -C mgmtorg4channel -n mgmtorgcc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('Org1MSP.member','Org4MSP.member')"

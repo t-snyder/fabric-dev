@@ -1,0 +1,6 @@
+FROM openjdk:8-alpine
+  
+RUN ["mkdir", "/usr/lib/config"]
+
+COPY sdk-wrapper-0.1.jar /usr/lib/sdkservice.jar
+COPY ./sdk-config/Org2 /usr/lib/config/

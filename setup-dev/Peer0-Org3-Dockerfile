@@ -1,0 +1,12 @@
+FROM ibmblockchain/fabric-peer:1.0.4
+
+RUN ["rm", "-rf", "/etc/hyperledger/fabric/msp"]
+RUN ["rm", "-rf", "/etc/hyperledger/fabric/tls"]
+
+COPY ./fabric-gen/crypto-config/peerOrganizations/Org3/peers/peer0.Org3/msp /etc/hyperledger/fabric/msp
+COPY ./fabric-gen/crypto-config/peerOrganizations/Org3/peers/peer0.Org3/tls /etc/hyperledger/fabric/tls
+COPY ./chaincode/go/ /opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+
+WORKDIR /opt/gopath/src/github.com/hyperledger/fabric/peer
+
+#ENTRYPOINT ["peer", "node", "start"]

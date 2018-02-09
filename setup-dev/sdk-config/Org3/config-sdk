@@ -1,0 +1,294 @@
+{
+  "orgContext" : 
+  {
+    "orgId"   : "Org3", 
+    "orgName" : "Org3",
+    "mspId"   : "Org3MSP"
+  },  
+  
+  "chainCodes" :
+  [
+    {
+      "chainCodeName" : "publiccc",
+      "chainCodeVersion" : "1.0",
+      "chainCodePath" : "",
+      "endorsementPolicyName" : "sdkwrapper.fabric.policy.SingleEndorsementPolicy"
+    },
+    {
+      "chainCodeName" : "mgmtorgcc",
+      "chainCodeVersion" : "1.0",
+      "chainCodePath" : "",
+      "endorsementPolicyName" : "sdkwrapper.fabric.policy.SingleEndorsementPolicy"
+    }
+  ],
+  
+  "users" :
+  [
+    {
+      "name" : "Admin",
+      "roles" : 
+      [
+        "admin"
+      ],
+      "account"       : "adminAccount",
+      "affiliation"   : "Org3Affiliation",
+      "mspId"         : "Org3MSP",
+      "enrollPrivKey" : "-----BEGIN PRIVATE KEY-----
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgROnYCNedFl18rVR/
+FTSOvP4wNZdp5u/MmxOT6xPXlGShRANCAAQwtb+G7jZnGNAy6NNmY1IUYGmgmkZV
+bE2svFlzUAD5ipR7LPYg/SEioqkOEmKXNug5kFKGI6/rzrxg2BfrjdB4
+-----END PRIVATE KEY-----",
+      "enrollCert"    : "-----BEGIN CERTIFICATE-----
+MIIB9jCCAZygAwIBAgIRAOHHhLwHfG4RM53JsXUSsY4wCgYIKoZIzj0EAwIwWzEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xDTALBgNVBAoTBE9yZzMxEDAOBgNVBAMTB2NhLk9yZzMwHhcNMTcx
+MTExMTcyMjQ4WhcNMjcxMTA5MTcyMjQ4WjBPMQswCQYDVQQGEwJVUzETMBEGA1UE
+CBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzETMBEGA1UEAwwK
+QWRtaW5AT3JnMzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDC1v4buNmcY0DLo
+02ZjUhRgaaCaRlVsTay8WXNQAPmKlHss9iD9ISKiqQ4SYpc26DmQUoYjr+vOvGDY
+F+uN0HijTTBLMA4GA1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMCsGA1UdIwQk
+MCKAIJ0Kz0AurTanY59yDfPm6eysurmUgIVoJkvcGH8XgYQnMAoGCCqGSM49BAMC
+A0gAMEUCIQDXreolw+eQI0RB1P7nFk4bnYEa8lyFrcXAoCKGKfUn/gIgTRZHItBo
+liRqL8uEiplmpAV9BhWIYsQ99dEKKR+X1yY=
+-----END CERTIFICATE-----"
+    }, 
+    {
+      "name" : "User1",
+      "roles" : 
+      [
+        "member"
+      ],
+      "account"       : "memberAccount",
+      "affiliation"   : "Org3Affiliation",
+      "mspId"         : "Org3MSP",
+      "enrollPrivKey" : "-----BEGIN PRIVATE KEY-----
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgmVI3R2A2N38uSA0d
+TbdquiylUp4Ag0TyTuxHpdlg3OihRANCAAR8FeXD5J/e8WvdQQCNxwU6eY2V/Bzo
+RKvO8DVK4/w2hppkYYqNW3Xo51hLqqp77EGMV0u+WOPjmIC7Zrd8ZgQc
+-----END PRIVATE KEY-----",
+      "enrollCert"    : "-----BEGIN CERTIFICATE-----
+MIIB9TCCAZygAwIBAgIRAP0+FIdNm5NiWyR/NRiTEUswCgYIKoZIzj0EAwIwWzEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xDTALBgNVBAoTBE9yZzMxEDAOBgNVBAMTB2NhLk9yZzMwHhcNMTcx
+MTExMTcyMjQ4WhcNMjcxMTA5MTcyMjQ4WjBPMQswCQYDVQQGEwJVUzETMBEGA1UE
+CBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzETMBEGA1UEAwwK
+VXNlcjFAT3JnMzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABHwV5cPkn97xa91B
+AI3HBTp5jZX8HOhEq87wNUrj/DaGmmRhio1bdejnWEuqqnvsQYxXS75Y4+OYgLtm
+t3xmBByjTTBLMA4GA1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMCsGA1UdIwQk
+MCKAIJ0Kz0AurTanY59yDfPm6eysurmUgIVoJkvcGH8XgYQnMAoGCCqGSM49BAMC
+A0cAMEQCIHFpax1pH+arIEpKea9DWnxiBVukacURUBMJw3Wp5UCoAiAaG5Y319z6
+i7m23BtpmI8eb5ZUujrWeVMa7OgQtY1gew==
+-----END CERTIFICATE-----"
+    }  
+  ],
+  
+  "channels" :
+  [
+    {
+      "channelName" : "publicchannel",
+      "channelType" : "public",
+      "invokeWaitTime" : 100000,
+      "deployWaitTime" : 120000,
+      "gossipWaitTime" : 5000,
+      "endorserPeers"  :
+      [
+        {
+          "peerId" : "peer0.Org1",
+          "orgId"  : "Org1",
+          "ipAddress" : "peer0-org1",
+          "orgEventHub" : false,
+          "endorsePort" : "7051",
+          "eventHubPort" : "",
+          "tlsCertificate" : "-----BEGIN CERTIFICATE-----
+MIICNzCCAd2gAwIBAgIQQEfLmRwiZwYLwVD4pRxGDDAKBggqhkjOPQQDAjBeMQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzENMAsGA1UEChMET3JnMTETMBEGA1UEAxMKdGxzY2EuT3JnMTAeFw0x
+NzExMTExNzIyNDhaFw0yNzExMDkxNzIyNDhaME8xCzAJBgNVBAYTAlVTMRMwEQYD
+VQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRMwEQYDVQQD
+EwpwZWVyMC5PcmcxMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEPi0mccqLCkve
+M2q1oxEK0yrr3CYdzfoEQnCyE3al5UrcpsNCcfHzp9Ql+FERsvRESwMmiO6eZPSj
+JK+14RgQiKOBizCBiDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUH
+AwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwKwYDVR0jBCQwIoAgaYp5j1nuyxUn
+/QG6FFLBcovreQlBHFJRt0SSaAZcO3kwHAYDVR0RBBUwE4IKcGVlcjAuT3JnMYIF
+cGVlcjAwCgYIKoZIzj0EAwIDSAAwRQIhAP1ONXhU6mlfUG/YV+ks3Jra5jSjLTyG
+weB73nGCv+dzAiANQSB03rpr6l/nGMUHBtkwHDZckQV3gdLT6CbvZ9MPvg==
+-----END CERTIFICATE-----",
+          "trustServerCert" : true,
+          "sslProvider" : "openSSL",
+          "negotiationType" : "TLS"
+        }
+      ],
+      "ordererNodes" :
+      [
+        {
+          "nodeId" : "orderer.service",
+          "orgId"  : "OrdererOrg",  
+          "ipAddress" : "orderer-service",
+          "ordererPort" : "7050",
+          "tlsCertificate" : "-----BEGIN CERTIFICATE-----
+MIICWTCCAgCgAwIBAgIRAIMcFtn185Q2Kafi0N/te+swCgYIKoZIzj0EAwIwbDEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xFDASBgNVBAoTC2V4YW1wbGUuY29tMRowGAYDVQQDExF0bHNjYS5l
+eGFtcGxlLmNvbTAeFw0xNzExMTExNzIyNDhaFw0yNzExMDkxNzIyNDhaMFgxCzAJ
+BgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJh
+bmNpc2NvMRwwGgYDVQQDExNvcmRlcmVyLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0C
+AQYIKoZIzj0DAQcDQgAE8AbD+1ANA4gElrlbi9BauBA0s2vM5d+N93ucUTjVydjc
+B3ZTg+cjrG8Wl4085hsZusnrlDzPca/RT4/i5Uey26OBljCBkzAOBgNVHQ8BAf8E
+BAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQC
+MAAwKwYDVR0jBCQwIoAg3wSB2zHQQjE+gS/Ttn5bSDazzTeSG29AVj7VOx6QLzww
+JwYDVR0RBCAwHoITb3JkZXJlci5leGFtcGxlLmNvbYIHb3JkZXJlcjAKBggqhkjO
+PQQDAgNHADBEAiB6UpUtaDWouko69IAByM5cnGTI66MgRl6HJEzfu3A/DwIgW86Y
+K+8QjVLhL3TVFPn0z9ReZzMSNYhNOSz0hrnbA8c=
+-----END CERTIFICATE-----",
+          "trustServerCert" : true,
+          "sslProvider" : "openSSL",
+          "negotiationType" : "TLS"
+        }
+      ],
+      "eventHubs" :
+      [
+        {
+          "peerId" : "peer0.Org3",
+          "orgId"  : "Org3",
+          "ipAddress" : "peer0-org3",
+          "isOrgEventHub" : true,
+          "endorsePort" : "",
+          "eventHubPort" : "7053",
+          "tlsCertificate" : "-----BEGIN CERTIFICATE-----
+MIICODCCAd6gAwIBAgIRAKUgFNKtHihqoa/7uc3LTkkwCgYIKoZIzj0EAwIwXjEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xDTALBgNVBAoTBE9yZzMxEzARBgNVBAMTCnRsc2NhLk9yZzMwHhcN
+MTcxMTExMTcyMjQ4WhcNMjcxMTA5MTcyMjQ4WjBPMQswCQYDVQQGEwJVUzETMBEG
+A1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzETMBEGA1UE
+AxMKcGVlcjAuT3JnMzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFUfEZUsvn9q
+5b7MOsMmIzlG7mvvrxf6+HaMcM3KlaJh1f7EzngXMKsssnwnr+A/xUro+nn3LMfa
+IjGgDeZtmxajgYswgYgwDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUF
+BwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKAIHjSUQsKBeFG
+dHfw1c5cTqHmOR64TjD2VlhugtDQ15K9MBwGA1UdEQQVMBOCCnBlZXIwLk9yZzOC
+BXBlZXIwMAoGCCqGSM49BAMCA0gAMEUCIQCGCMSeYt3vO1TRZ59V02ROr3yTFwFd
+jd0TeOEtBGj9mgIgRe0JkaWhEr6Ki5Pk6tPnVRAiuN+zp8Qm6X/u7au/Rz8=
+-----END CERTIFICATE-----",
+          "trustServerCert" : true,
+          "sslProvider" : "openSSL",
+          "negotiationType" : "TLS"
+        }
+      ]        
+    },
+    {
+      "channelName"    : "mgmtorg3channel",
+      "channelType"    : "command",
+      "invokeWaitTime" : 100000,
+      "deployWaitTime" : 120000,
+      "gossipWaitTime" : 5000,
+      "endorserPeers"  :
+      [
+        {
+          "peerId" : "peer0.Org3",
+          "orgId"  : "Org3",
+          "ipAddress" : "peer0-org3",
+          "orgEventHub" : false,
+          "endorsePort" : "7051",
+          "eventHubPort" : "",
+          "tlsCertificate" : "-----BEGIN CERTIFICATE-----
+MIICODCCAd6gAwIBAgIRAKUgFNKtHihqoa/7uc3LTkkwCgYIKoZIzj0EAwIwXjEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xDTALBgNVBAoTBE9yZzMxEzARBgNVBAMTCnRsc2NhLk9yZzMwHhcN
+MTcxMTExMTcyMjQ4WhcNMjcxMTA5MTcyMjQ4WjBPMQswCQYDVQQGEwJVUzETMBEG
+A1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzETMBEGA1UE
+AxMKcGVlcjAuT3JnMzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFUfEZUsvn9q
+5b7MOsMmIzlG7mvvrxf6+HaMcM3KlaJh1f7EzngXMKsssnwnr+A/xUro+nn3LMfa
+IjGgDeZtmxajgYswgYgwDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUF
+BwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKAIHjSUQsKBeFG
+dHfw1c5cTqHmOR64TjD2VlhugtDQ15K9MBwGA1UdEQQVMBOCCnBlZXIwLk9yZzOC
+BXBlZXIwMAoGCCqGSM49BAMCA0gAMEUCIQCGCMSeYt3vO1TRZ59V02ROr3yTFwFd
+jd0TeOEtBGj9mgIgRe0JkaWhEr6Ki5Pk6tPnVRAiuN+zp8Qm6X/u7au/Rz8=
+-----END CERTIFICATE-----",
+          "trustServerCert" : true,
+          "sslProvider" : "openSSL",
+          "negotiationType" : "TLS"
+        },
+        {
+          "peerId" : "peer0.Org1",
+          "orgId"  : "Org1",
+          "ipAddress" : "peer0-org1",
+          "orgEventHub" : false,
+          "endorsePort" : "7051",
+          "eventHubPort" : "",
+          "tlsCertificate" : "-----BEGIN CERTIFICATE-----
+MIICNzCCAd2gAwIBAgIQQEfLmRwiZwYLwVD4pRxGDDAKBggqhkjOPQQDAjBeMQsw
+CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+YW5jaXNjbzENMAsGA1UEChMET3JnMTETMBEGA1UEAxMKdGxzY2EuT3JnMTAeFw0x
+NzExMTExNzIyNDhaFw0yNzExMDkxNzIyNDhaME8xCzAJBgNVBAYTAlVTMRMwEQYD
+VQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRMwEQYDVQQD
+EwpwZWVyMC5PcmcxMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEPi0mccqLCkve
+M2q1oxEK0yrr3CYdzfoEQnCyE3al5UrcpsNCcfHzp9Ql+FERsvRESwMmiO6eZPSj
+JK+14RgQiKOBizCBiDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUH
+AwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwKwYDVR0jBCQwIoAgaYp5j1nuyxUn
+/QG6FFLBcovreQlBHFJRt0SSaAZcO3kwHAYDVR0RBBUwE4IKcGVlcjAuT3JnMYIF
+cGVlcjAwCgYIKoZIzj0EAwIDSAAwRQIhAP1ONXhU6mlfUG/YV+ks3Jra5jSjLTyG
+weB73nGCv+dzAiANQSB03rpr6l/nGMUHBtkwHDZckQV3gdLT6CbvZ9MPvg==
+-----END CERTIFICATE-----",
+          "trustServerCert" : true,
+          "sslProvider" : "openSSL",
+          "negotiationType" : "TLS"
+        }
+      ],
+      "ordererNodes" :
+      [
+        {
+          "nodeId" : "orderer.service",
+          "orgId"  : "OrdererOrg",  
+          "ipAddress" : "orderer-service",
+          "ordererPort" : "7050",
+          "tlsCertificate" : "-----BEGIN CERTIFICATE-----
+MIICWTCCAgCgAwIBAgIRAIMcFtn185Q2Kafi0N/te+swCgYIKoZIzj0EAwIwbDEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xFDASBgNVBAoTC2V4YW1wbGUuY29tMRowGAYDVQQDExF0bHNjYS5l
+eGFtcGxlLmNvbTAeFw0xNzExMTExNzIyNDhaFw0yNzExMDkxNzIyNDhaMFgxCzAJ
+BgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJh
+bmNpc2NvMRwwGgYDVQQDExNvcmRlcmVyLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0C
+AQYIKoZIzj0DAQcDQgAE8AbD+1ANA4gElrlbi9BauBA0s2vM5d+N93ucUTjVydjc
+B3ZTg+cjrG8Wl4085hsZusnrlDzPca/RT4/i5Uey26OBljCBkzAOBgNVHQ8BAf8E
+BAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQC
+MAAwKwYDVR0jBCQwIoAg3wSB2zHQQjE+gS/Ttn5bSDazzTeSG29AVj7VOx6QLzww
+JwYDVR0RBCAwHoITb3JkZXJlci5leGFtcGxlLmNvbYIHb3JkZXJlcjAKBggqhkjO
+PQQDAgNHADBEAiB6UpUtaDWouko69IAByM5cnGTI66MgRl6HJEzfu3A/DwIgW86Y
+K+8QjVLhL3TVFPn0z9ReZzMSNYhNOSz0hrnbA8c=
+-----END CERTIFICATE-----",
+          "trustServerCert" : true,
+          "sslProvider" : "openSSL",
+          "negotiationType" : "TLS"
+        }
+      ],
+      "eventHubs" :
+      [
+        {
+          "peerId" : "peer0.Org3",
+          "orgId"  : "Org3",
+          "ipAddress" : "peer0-org3",
+          "isOrgEventHub" : true,
+          "endorsePort" : "",
+          "eventHubPort" : "7053",
+          "tlsCertificate" : "-----BEGIN CERTIFICATE-----
+MIICODCCAd6gAwIBAgIRAKUgFNKtHihqoa/7uc3LTkkwCgYIKoZIzj0EAwIwXjEL
+MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+cmFuY2lzY28xDTALBgNVBAoTBE9yZzMxEzARBgNVBAMTCnRsc2NhLk9yZzMwHhcN
+MTcxMTExMTcyMjQ4WhcNMjcxMTA5MTcyMjQ4WjBPMQswCQYDVQQGEwJVUzETMBEG
+A1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzETMBEGA1UE
+AxMKcGVlcjAuT3JnMzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABFUfEZUsvn9q
+5b7MOsMmIzlG7mvvrxf6+HaMcM3KlaJh1f7EzngXMKsssnwnr+A/xUro+nn3LMfa
+IjGgDeZtmxajgYswgYgwDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUF
+BwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKAIHjSUQsKBeFG
+dHfw1c5cTqHmOR64TjD2VlhugtDQ15K9MBwGA1UdEQQVMBOCCnBlZXIwLk9yZzOC
+BXBlZXIwMAoGCCqGSM49BAMCA0gAMEUCIQCGCMSeYt3vO1TRZ59V02ROr3yTFwFd
+jd0TeOEtBGj9mgIgRe0JkaWhEr6Ki5Pk6tPnVRAiuN+zp8Qm6X/u7au/Rz8=
+-----END CERTIFICATE-----",
+          "trustServerCert" : true,
+          "sslProvider" : "openSSL",
+          "negotiationType" : "TLS"
+        }
+      ]        
+    }
+  ] 
+}     
+    
